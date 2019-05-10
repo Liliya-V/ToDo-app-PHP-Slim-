@@ -5,13 +5,10 @@ use Slim\Http\Request;
 use Slim\Http\Response;
 
 return function (App $app) {
-    $container = $app->getContainer();
 
-    $app->get('/', function (Request $request, Response $response, array $args) use ($container) {
-        // Sample log message
-        $container->get('logger')->info("Slim-Skeleton '/' route");
+    $app->get('/', 'TasksShowController');
+    $app->post('/addTask', 'TaskAddController');
+    $app->post('/completedTask', 'TaskCompletedController');
 
-        // Render index view
-        return $container->get('renderer')->render($response, 'index.phtml', $args);
-    });
+
 };

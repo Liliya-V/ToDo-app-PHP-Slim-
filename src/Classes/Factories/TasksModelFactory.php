@@ -9,7 +9,15 @@
 namespace ToDo\Factories;
 
 
+
+use ToDo\Models\TasksModel;
+
 class TasksModelFactory
 {
+    public function __invoke($dic)
+    {
+        $db = $dic->get('DB');
+        return new TasksModel($db);
+    }
 
 }

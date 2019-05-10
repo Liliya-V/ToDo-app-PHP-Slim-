@@ -8,8 +8,14 @@
 
 namespace ToDo\Factories;
 
+use ToDo\Controllers\TaskCompletedController;
 
 class TaskCompletedControllerFactory
 {
+    public function __invoke($dic)
+    {
+        $tasksModel = $dic->get('TasksModel');
+        return new TaskCompletedController($tasksModel);
+    }
 
 }

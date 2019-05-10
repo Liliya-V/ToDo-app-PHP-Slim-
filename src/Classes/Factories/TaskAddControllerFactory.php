@@ -9,7 +9,14 @@
 namespace ToDo\Factories;
 
 
+use ToDo\Controllers\TaskAddController;
+
 class TaskAddControllerFactory
 {
+    public function __invoke($dic)
+    {
+        $tasksModel = $dic->get('TasksModel');
+        return new TaskAddController($tasksModel);
+    }
 
 }

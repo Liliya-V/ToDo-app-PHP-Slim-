@@ -9,7 +9,15 @@
 namespace ToDo\Factories;
 
 
+use ToDo\Controllers\TasksShowController;
+
 class TasksShowControllerFactory
 {
+    public function __invoke($dic)
+    {
+        $phpRenderer = $dic->get('renderer');
+        $tasksModel = $dic->get('TasksModel');
+        return new TasksShowController($phpRenderer, $tasksModel);
+    }
 
 }

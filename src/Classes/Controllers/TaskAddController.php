@@ -9,29 +9,33 @@
 namespace ToDo\Controllers;
 
 use ToDo\Models\TasksModel;
-use Slim\Views\PhpRenderer;
 use Slim\Http\Response;
 use Slim\Http\Request;
 
 class TaskAddController
 {
-    private $phpRenderer;
-    private $colorsModel;
+    private $tasksModel;
 
     /**
      * ColoraController constructor.
      * @param $phpRenderer
      */
-    public function __construct(PhpRenderer $phpRenderer, ColorsModel $colorsModel)
+    public function __construct(TasksModel $tasksModel)
     {
-        $this->phpRenderer = $phpRenderer;
-        $this->colorsModel = $colorsModel;
+        $this->tasksModel = $tasksModel;
     }
 
     public function __invoke(Request $request, Response $response, array $args)
     {
-        $colors = $this->colorsModel->getColors();
-        return $this->phpRenderer->render($response, 'colors.phtml', ['colors' => $colors]);
+        $data = $request->getParsedBody();
+        $success = $this->tasksModel->addTask($data['task']);
+
+        if ($success) {
+        return $response->withRedirect('/');
+        } else {
+            echo 'Something went wrong, so may be you don\'t really need to do it?';
+        }
+
     }
 
 }

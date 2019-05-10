@@ -7,8 +7,39 @@
         <link href='style.css' rel='stylesheet' type='text/css'>
     </head>
     <body>
-        <h1></h1>
-        <div>a microframework for PHP</div>
+        <h1>Looks like you have some stuff </h1>
+        <h2>TO DO</h2>
+        <div class="container">
+            <form action="/addTask" method="post">
+                <label>Add a task to the list</label>
+                <input type="text" name="task"/>
+                <input type="submit" value="Add">
+            </form>
+            <div class="todo">
+                <p>Tasks To Do</p>
+                <ul>
+                    <?php
+                foreach ($tasks as $task) {
+                    echo '<li>'. $task['task'] . '<form class="checkbox" action="/completedTask?id=' .$task['id'] .'" method="post">
+    <input type="submit" value="Done">
+</form>';
+                }
+            ?>
+                </ul>
+            </div>
+            <div class="completed">
+                <p>Completed Tasks</p>
+                <ul>
+                    <?php
+                    foreach ($completedtasks as $completedtask) {
+                        echo '<li>'. $completedtask['task'];
+                    }
+                    ?>
+                </ul>
+            </div>
+        </div>
 
     </body>
 </html>
+
+
